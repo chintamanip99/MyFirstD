@@ -1,0 +1,13 @@
+<h1>Hello World!!{{name}}</h1>
+<form method="post" action="add">
+	{% csrf_token %}
+	<input type="text" name="num1">
+	<input type="text" name="num2">
+	<input type="submit" value="Submit">
+
+   
+
+</form>
+{% for element in results %}
+  {{results}}
+  {% endfor %}

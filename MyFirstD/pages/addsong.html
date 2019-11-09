@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>World Of Music!!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<img src="{% static 'one/images/csr12.jpg' %}">
+<h1> Welcome to the World Of Music!!</h1>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index/">The Music World</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+</div>
+</nav>
+
+<div class="container">
+
+  <h2>List of all the songs:</h2>
+  <table border='3' cellspacing="1"  class="table table-hover">
+      <tr><th>Album</th><th>Song Title</th><th>Song Logo</th><th>File Type</tr>
+  {% for song11 in songlist %}
+      <tr><td>{{song11.album}}</td><td>{{song11.son_title}}</td><td><img src="{% static song11.son_logo %}"></td><td>{{song11.file_type}}</td><td><a href="delete?son_title111={{song11.son_title}}">Delete</a></td></tr>
+    {% endfor %}
+  </table>
+  <h2>Add Songs Here:</h2>
+  <form action="addsongit1" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="pwd">Song Name:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="son_title">
+    </div>
+    <div class="form-group">
+      <label for="pwd">File Type:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="file_type">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Song Logo:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="son_logo">
+    </div>
+    <div class="form-group">
+      <label for="email">Album Name:</label>
+      <select class="form-control" name="album">
+        {% for album123 in albumlist %}
+        <option value="{{album123.album_title}}">{{album123.album_title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <h2>Update Songs Here</h2>
+
+  <form action="update" method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="email">Song Name:</label>
+      <select class="form-control" name="songname">
+        {% for song123 in songlist %}
+        <option value="{{song123.son_title}}">{{song123.son_title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pwd">Song's New Name:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="" name="newsongname">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Song's New File Type:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="" name="newsongfiletype">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Song's New Song Logo:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="" name="newsonglogo">
+    </div>
+    <div class="form-group">
+      <label for="email">Song's New Album Name:</label>
+      <select class="form-control" name="newsongalbum">
+        {% for album123 in albumlist %}
+        <option value="{{album123.album_title}}">{{album123.album_title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>  
+
+</div>
+
+</body>
+</html>
